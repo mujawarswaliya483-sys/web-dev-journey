@@ -1,0 +1,49 @@
+*{
+    align-items: center;
+
+}
+
+
+#main-topic{
+color: blue;
+}
+h1 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+h3{
+    font-family: Georgia, 'Times New Roman', Times, serif
+}
+h5{
+    font-family:Georgia, 'Times New Roman', Times, serif ;
+}
+
+.p{
+    color: white;
+    background-color: cornflowerblue;
+}
+
+input[type="cheakbox"]  {
+   background-color:purple ; 
+   color: azure;
+}
+
+button:hover{
+    background-color: yellow;
+    color: blue;
+}
+
+h1::first-letter{
+    color: red;
+}
+
+p:nth-of-type(2n+1){
+    color: yellow;
+}
+input[type="cheakbox"]:hover{
+
+    background-color: dark green;
+
+}
+
+

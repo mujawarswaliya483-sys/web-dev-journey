@@ -1,0 +1,64 @@
+.box{
+    height: 100px;
+    width: 300px;
+    background-color: lightpink;
+    animation-name: coloranimation;
+    animation-duration: 2s;
+    animation-timing-function: ease-in ;
+    transition-delay: 0.4s;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+
+}
+
+@keyframes fontAnimation {
+    from {
+        font-size:20px;
+    }
+
+    to {
+        font-size:40px;
+    }
+}
+
+@keyframes coloranimation{
+    from{
+           background-color: aqua;
+    }
+
+    to{
+        background-color: greenyellow;
+    }
+}
+
+.width{
+
+        height: 100px;
+    width: 300px;
+    background-color:whitesmoke;
+    
+    animation-name: widthanimation;
+    animation-duration: 2s;
+    animation-timing-function: ease-in ;
+    transition-delay: 0.4s;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+
+    margin-top: 150px;
+}
+
+@keyframes widthanimation{
+    from{
+        width: 50px;
+        background-color:blanchedalmond ;
+        color: black;
+
+    }
+
+    to{
+        width: 500px;
+        background-color: aquamarine;
+        color: white;
+        border-radius: 50%;
+    }
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input value="text" placeholder="add message" id="inp">
+
+    <button>adding event listner</button>
+
+    <!-- Q3 -->
+
+    <input type="text" placeholder="enter your name"id="input">
+    <h2>hello enter characters</h2>
+    <script>
+        
+        // let input=document.querySelector("#inp");
+
+        // input.addEventListener("mouseout",function(event){
+        //     console.log("event");
+        //     console.log("key was mpuseout");
+        // });
+
+        // Q2.
+
+        let btn=document.querySelector("button");
+
+        btn.addEventListener("click",function(){
+            console.dir(this.innerText);
+            this.style.backgroundColor="blue";
+            this.style.color="white";
+
+        })
+
+        let con = document.querySelector("#input");
+
+        con.addEventListener("click",function(){
+            if(con!==a-z && con!==A-Z){
+                alert("error");
+            } 
+        })
+
+    </script>
+</body>
+</html>

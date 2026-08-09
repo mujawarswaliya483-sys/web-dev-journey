@@ -1,0 +1,18 @@
+h2{
+    color: orange;
+}
+
+button{
+    background-color: blue;
+    color: white;
+}
+
+p{
+    background-color: black;
+    color: aliceblue;
+}
+#text-line{
+    line-height: normal;
+    line-height: 3;
+    letter-spacing: 10px;
+}

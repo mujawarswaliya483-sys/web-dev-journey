@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+//     function savetoDb(data){
+//     return new promise((resolve, reject)=>{
+//         let internetSpeed = Math.floor(Math.random()*10)+1;
+//         if(internetSpeed>4){
+//             resolve("success : data was saved");
+//         }else{
+//             reject("failure:data was not saved")
+//         }
+//     });
+// }
+
+
+// 1. Creating a promise
+const checkServerStatus = new Promise((resolve, reject) => {
+  let success = true; // Simulating a server task outcome
+
+  if (success) {
+    resolve("Server is running smoothly!"); // Moves to Fulfilled
+  } else {
+    reject("Could not connect to the server."); // Moves to Rejected
+  }
+});
+
+// 2. Consuming the promise
+checkServerStatus
+  .then((message) => {
+    console.log("Success: " + message);
+  })
+  .catch((error) => {
+    console.error("Error: " + error);
+  });
+
+</script>
+</body>
+</html>

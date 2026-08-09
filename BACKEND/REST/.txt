@@ -1,0 +1,6 @@
+to connect different pages we use redirect 
+res.redirect(URL)
+
+we use uuid to get unique ids for each post 
+we install it first from npm uuid 
+and then place uuid4 in place of posts id 

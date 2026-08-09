@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .hi{
+            color: purple;
+        }
+
+        .red{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    
+    <button>click me</button>
+    <!-- Q5. -->
+    <p>Apna College delta practice</p>
+
+    <!-- Q4. -->
+     <h1>hello</h1>
+    <script>
+        // Q1.
+        let btn = document.createElement(button);
+        let input = document.createElement("input");
+        btn.innerText="you clicked";
+        document.querySelector("body").append(button);
+        document.querySelector("body").append(input);
+        btn.style.color="red";
+
+        // Q2.
+        button.setAttribute("id","btn");
+        input.setAttribute("placeholder","username");
+
+        // Q3.
+
+        // Q4.
+        let h1 = document.querySelector('h1');
+        h1.innerText="<u>dom replaced</u>";
+        h1.querySelector("body").append(h1);
+
+        // Q5.
+        let p = document.querySelector('p');
+        p.innerText="apna college <b>Delta</b> Practice";
+        documen.querySelector("body").append(p);
+    </script>
+</body>
+</html>

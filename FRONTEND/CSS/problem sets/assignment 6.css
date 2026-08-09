@@ -1,0 +1,27 @@
+.container{
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12,1fr);
+    grid-gap: 10px;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.container div{
+    background-color: pink;
+    font-size: 1.5rem;
+}
+
+.header{
+    grid-column: 1 / span 12;
+
+}
+
+.sidebar{
+    grid-column: 1 /span 3;
+    grid-row: 2 / span 10;
+}
+
+.navigation{
+    grid
+}

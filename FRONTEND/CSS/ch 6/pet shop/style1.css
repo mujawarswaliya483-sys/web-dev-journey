@@ -1,0 +1,61 @@
+body{
+  background-color: #71b7eb;
+}
+
+
+.card {
+  width: 400px;
+  border: 2px solid black;
+  border-radius: 25px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #d5deef;
+}
+
+img {
+  width: 100%;
+  border-radius: 25px;
+}
+h1{
+  background-color: aliceblue;
+  width: 300px;
+  border-radius: 0 15px 15px 0;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  color:#395886;
+  background-color: aliceblue;
+  width: 150px;
+  border-radius:0 20px 20px 0;
+}
+
+span {
+  color: #8aaee0;
+}
+
+h4 {
+  text-align: right;
+  color: #395886;
+}
+
+#pets {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card:hover{
+  background-color: #8aaee0;
+  transition-delay: 0.3s;
+  transition: 1s;
+  box-shadow: 3px 2px 10px black;
+  transform:skew(15deg);
+  color:white;
+}
+
+@media (max-width:375px){
+  #pets{
+    flex-wrap:wrap;
+  }
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="/action">
+        <input placeholder="username">
+        <button>Register</button>
+         <input placeholder="password" type="password" id="pass"/>
+    </form>
+
+    
+
+
+
+
+
+
+
+    <script>
+        let form = document.querySelector("form");
+
+        form.addEventListener("submit",function(event){
+            event.preventDefault();//it will not go on the action url
+            // console.log("registration successeful");
+
+            // extracting form data.
+            let user= document.querySelector("#user");
+            let pass = document.querySelector("#pass");
+            console.log(user.value);
+            console.log(pass.value);
+
+            alert('hi ${user.value}, your password set to ${pass.value}');
+        });
+
+
+    </script>
+</body>
+</html>

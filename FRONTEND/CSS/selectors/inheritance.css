@@ -1,0 +1,39 @@
+div{
+    background-color: black;
+}
+
+/* form{
+background- color: red} */
+
+input{
+    background-color: inherit;
+}
+
+button{
+    background-color: aquamarine;
+
+}
+
+h2{
+    color: aqua;
+}
+
+p{
+    color: aqua;
+}
+
+input{
+    color: aquamarine;
+
+}
+
+button:hover{
+    background-color: blueviolet;
+    color:black;
+}
+
+input[type="text] cheaked 
++ label{
+ background-color:blanchedalmond;
+ color: chocolate;
+}

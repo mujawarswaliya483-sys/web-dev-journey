@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <body>
+        <style>
+        
+body{
+    text-align: center;
+}
+
+
+.container{
+    margin: 2vh 2vh;
+    height: 50vh;
+    width: 100vw;
+    border: 1px solid black;
+}
+p{
+    text-align: center;
+    font-size: 50px;
+}</style>
+
+</head>
+<body>
+    <h1>Generate a random color</h1>
+    <br>
+    <button>generate color</button>
+
+    <div class="container"><p>this is new color</p></div>
+
+    <h3>hello i am blue!</h3>
+
+    <!-- KEYBOARD EVENTS -->
+     <input value="text" placeholder="enter text">
+     <button>click me</button>
+
+    <script>
+        // let btn = document.querySelector("button");
+
+// btn.addEventListener("click",function(){
+//     let h1 = document.querySelector("h1");
+//     let randomColor = getRandomColor();
+    
+//     h1.innerText = randomColor;
+
+//     let div = document.querySelector("div");
+//     div.style.backgroundColor = randomColor;
+
+//     console.log("color updated");
+// });
+
+// function getRandomColor(){
+//     let red = Math.floor(Math.random() * 255);
+//       let green = Math.floor(Math.random() * 255);
+//         let blue = Math.floor(Math.random() * 255);
+
+//         let color = 'rgb(${red}, ${green}, ${blue})';
+//         return color;
+// }
+
+// let h3 = document.querySelector("h3")
+
+// h3.addEventListener("click",function(){
+//     console.dir(this.innerText);
+//     this.style.backgroundColor ="blue";
+//     this.style.color = "white";
+// })
+
+// let button = document.querySelector("button")
+
+// button.addEventListener("click",function(){
+//     console.dir(this.innerText);
+//     this.style.backgroundColor = "violet";
+//     this.style.borderRadius= "50px";
+// })
+
+// keyboard events
+
+let inp = document.querySelector("input");
+
+inp.addEventListener("keydown",function(event){
+    console.log(event);
+    console.log("key was pressed");
+})
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+*{
+      font-family:'Courier New' ;
+}
+
+h1 {
+    color: #b92b27;
+}
+#login{
+       background-color: aliceblue;
+       
+}
+
+#signup{
+     background-color: #b92b27;
+     color: aliceblue;
+
+}
+
+h3{
+    color: #b92b27;
+}
+
+.upvote{
+    background-color: green;
+}
+
+
+/* desendent selector */
+
+p a{
+    color: purple;
+    background-color: yellow;
+}
+
+nav ul li a{
+    color: #1b74e4;
+}
+
+nav ul {
+    color: #b92b27;
+
+}
+nav a{
+    color: #b92b27;
+}
+
+
+/* adjecent sibling combinator */
+
+p+h3{
+    text-decoration: double underline;
+}
+
+div > input {
+    background-color: #322f2f;
+}
+
+input[type="text"]{
+    color: aquamarine;
+
+}
+
+#myid p{
+
+    color: #1b74e4;
+}
+
+button:hover{
+    background-color: #322f2f;
+    color: aquamarine;
+
+}
+
+h3:hover{
+    text-decoration: none;
+}
+
+button:active{
+    background-color: #b92b27;
+}
+
+/* cheaked pusdo class */
+
+input[type=radio]:cheaked + lable{
+    color: hotpink;
+    font-weight:  bold;
+}
+
+post:nth-of-type(2){
+    back
+}
+
+h1::first-letter{
+    color: black;
+}
+
+
+p::first-line{
+    color:blue ;
+}
+
+h3{
+    background-color: #1b74e4;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>LEARNING CALL BACK HELL</h1>
+    
+    <script>
+//         // A classic example of Callback Hell
+// getUserData(userId, function(user) {
+//     getOrders(user.id, function(orders) {
+//         getOrderDetails(orders[0].id, function(details) {
+//             getShippingStatus(details.id, function(status) {
+//                 console.log("Shipping status is: " + status);
+//                 // The nesting can go on and on...
+//             });
+//         });
+//     });
+// });
+
+let h1 = document.querySelector("h1");
+
+function changeColor(color,delay,nextColorChange){
+    setTimeout(()=>{
+        h1.style.color = color;
+        nextColorChange();
+    },delay);
+}
+
+changeColor("red",1000,()=>{
+    changeColor("orange",1000,()=>{
+        changeColor("green",1000,()=>{
+            changeColor("pink",1000,()=>{
+                changeColor("blue",1000);
+            });
+        });
+    });
+});
+    </script>
+</body>
+</html>

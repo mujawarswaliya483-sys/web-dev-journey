@@ -1,0 +1,13 @@
+<%- include("includes/head.ejs") %>
+<body>
+    <h1>Roll Dice</h1>
+    <h1>Dice gave value:<%= diceVal %></h1>
+
+    <% if(diceVal === 6) { %>
+        <p>You rolled a six!</p>
+    <% } else { %>
+        <p>You didn't roll a six.</p>
+    <% } %>
+</body>
+</html>
+

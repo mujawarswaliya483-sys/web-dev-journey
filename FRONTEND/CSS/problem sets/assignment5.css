@@ -1,0 +1,41 @@
+.container{
+    height: 400px;
+    width: 400px;
+    border: 2px solid rgb(0, 157, 255);
+    background-color: aliceblue;
+    margin-left: 400px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    align-items: center;
+    display: flex;
+}
+
+#box{
+    height: 100px;
+    width: 100px;
+    font-size: 50px;
+    background-color: gray;
+    border-radius: 5px;
+    border: 2px solid black;
+    text-align: center;
+   
+} 
+
+
+#navbar{
+    height: 50px;
+    width: 900px;
+    background-color: pink;
+    border-radius: 10px;
+    border: 2px solid lightblue;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.option{
+    display: flex;
+    position: relative;
+    font-size: 24px;
+}
