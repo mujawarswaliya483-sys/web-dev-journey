@@ -1,0 +1,298 @@
+*{
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0px;
+  padding: 0px;
+  background-color: black;
+  color: aliceblue;
+  overflow: hidden;
+}
+
+.main{
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar{
+   background-color: #121212;
+   width: 340px;
+    border-radius: 1rem  ; 
+    /* 1 rem = 16px */
+}
+
+.main-content{
+    background-color: ;
+    flex: 1;
+    border-radius: 1rem;
+    overflow: auto;
+}
+
+
+
+.nav{
+  background-color: rgb(29, 28, 28);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100px;
+  padding: 0.5rem;
+  margin: 3px;
+
+}
+
+a{
+ text-decoration: none;
+}
+
+.nav-option{
+   line-height: 2.5rem;
+   opacity: 0.7;
+   padding: 0.5rem;
+}
+
+.nav-option:hover{
+ opacity: 1;
+ font-size: 15px;
+}
+.nav-option i {
+  font-size: 1.25rem;
+}
+
+.nav-option a {
+    font-size: 1rem;
+
+}
+
+.nav-option i :hover{
+  background-color: antiquewhite;
+}
+
+.Library img{
+  height: 20px;
+  margin:10px;
+}
+
+.Library{
+  padding: 4px;
+   background-color: rgb(29, 28, 28);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+  border-radius: 5px;
+  margin: 3px;
+}
+
+.Library p {
+  margin-right: 30px;
+  margin-left: 7px;
+  background-color: #1d1c1c;
+  font-weight: 600;
+}
+.Library i {
+  margin-left:20px ;
+  background-color: #1d1c1c;
+}
+
+.playlist{
+  height: 200px;
+  margin: 3px 6px 3px 6px;
+  border-radius: 5px;
+  background-color: #1d1c1c;
+  flex-direction: column;
+  
+}
+
+.playlist p{
+  background-color: #1d1c1c;
+  text-align: left;
+  padding: 2px;
+  margin: 5px;
+  font-weight: 900;
+}
+
+.playlist button{
+  border-radius: 15px;
+  margin-top: 10px ;
+  background-color: aliceblue;
+  color:#121212;
+  height: 35px;
+  width: 130px;
+  font-weight: 500;
+  margin-top: 30px;
+  margin-left: 10px;
+}
+
+.playlist button:hover{
+  background-color: #1d1c1c;
+  color: aliceblue;
+  box-shadow: 2px 2px white;
+}
+
+.podcast{
+  height: 200px;
+  margin: 10px 6px 3px 6px;
+  border-radius: 5px;
+  background-color: #1d1c1c;
+  flex-direction: column;
+}
+
+ button{
+  margin-top: 10px ;
+  background-color: aliceblue;
+  color:#121212;
+  height: 35px;
+  width: 130px;
+  font-weight: 500;
+  margin-top: 1px;
+  margin-left: 10px;
+  border-radius: 15px;
+}
+
+
+.podcast p{
+  font-weight: 900;
+  margin: 15px;
+  background-color: #1d1c1c;
+}
+
+.podcast button:hover{
+   background-color: #1d1c1c;
+   color: aliceblue;
+   box-shadow:2px 2px white;
+}
+
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  background-color: rgb(40, 39, 39);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0 1rem 0;
+}
+
+.nav-icons img{
+    font-size: 2rem;
+    width: ;
+    justify-content: space-around;
+}
+
+.nav-icons{
+  margin-left: 1.9rem;
+}
+.nav-sticky{
+   display: flex;
+   justify-content: center;
+   align-items:center ;
+   background-color:  rgb(40, 39, 39);
+   
+  }
+
+  .nav-option button{
+    margin-right: 1.5rem;
+  }
+
+  .sticky{
+    background-color: black;
+    color: aliceblue;
+  }
+
+  .cards h2{
+    font-weight: 500;
+    margin-top: 5px;
+  }
+
+  .cards-fifty{
+    margin-top: 30px;
+    border-radius: 5px;
+    height: 300px;
+    border: 2px solid white;
+    width: 300px;
+    margin-left: 30px;
+    background-image: url(card1img.jpeg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+  }
+
+  .fifty{
+    width: 400px;
+    /* border: 2px solid white; */
+    padding: 55px;
+
+  }
+
+  .fifty h1{
+    margin-left: 1.5rem;
+    font-weight: 700;
+  }
+
+  .fifty p{
+    margin-left: 1.5rem;
+    font-weight: 400;
+    line-height: 30px;
+  }
+
+   .spotify-original h1{
+    margin-left: 1.5rem;
+    font-weight: 800;
+   }
+
+   .spotify-original img{
+    margin-right: 35px;
+    border-radius: 5px;
+    
+   }
+
+   .spotify-content-img img:hover{
+    opacity: 0.9;
+   }
+
+   .shows-head{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    font-size: 600;
+   }
+
+   .shows-images img{
+    margin-right: 40px;
+    border-radius: 5px;
+    margin-top: 35px;
+
+   }
+
+    .shows-images img:hover{
+      opacity: 0.9;
+    }
+
+   .music-player{
+    background-color: black;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 72px;
+}
+
+.play img{
+  height: 50px;
+  width: 50px;
+  margin-right: 100px;
+align-items: center;
+  
+  
+}
+
+/* .plays img{
+  
+  align-items: center;
+} */
+
+  @media (max-width:1000px){
+    .hide{
+      display: none;
+    }
+  }
