@@ -1,0 +1,796 @@
+to connect different pages we use redirect 
+res.redirect(URL)
+
+we use uuid to get unique ids for each post 
+we install it first from npm uuid 
+and then place uuid4 in place of posts id 
+
+
+
+
+This is a Node.js + Express + EJS mini social-media backend. It is essentially a small version of a posts application where you can:
+
+See all posts
+Create a new post
+See one specific post
+Later update a post using PATCH
+
+I'll explain it line by line and also show you how the request flows, because that is the most important part for understanding backend.
+
+1. Import Express
+const express = require("express");
+
+express is a Node.js framework used to create web servers and APIs easily.
+
+Think:
+
+Express = tool that helps us build our backend/server.
+
+2. Create the Express application
+const app = express();
+
+Here we create our Express application.
+
+app will be used to:
+
+create routes
+use middleware
+start the server
+handle requests
+
+For example:
+
+app.get(...)
+app.post(...)
+app.patch(...)
+3. Define the port
+const port = 8080;
+
+Your server will run on port 8080.
+
+So when you start the application, you can visit:
+
+http://localhost:8080
+
+Think of a port as a door through which your application receives requests.
+
+4. Import Path
+const path = require("path");
+
+path is a built-in Node.js module.
+
+You are using it later to create paths to your folders:
+
+path.join(__dirname, "views")
+
+and
+
+path.join(__dirname, "public")
+
+This makes file paths work properly across operating systems.
+
+5. Import UUID
+const { v4: uuidv4 } = require("uuid");
+
+This imports the v4 function from the uuid package and renames it to uuidv4.
+
+UUID means:
+
+Universally Unique Identifier
+
+For example:
+
+550e8400-e29b-41d4-a716-446655440000
+
+Every post gets a unique ID.
+
+You use:
+
+uuidv4()
+
+to generate one.
+
+6. Middleware: express.urlencoded()
+app.use(express.urlencoded({extended:true}))
+
+This is very important.
+
+When an HTML form sends data to your server, Express needs to understand that form data.
+
+For example, suppose your form contains:
+
+<form action="/post" method="POST">
+
+<input name="username">
+<textarea name="content"></textarea>
+
+<button>Submit</button>
+
+</form>
+
+When the user submits it, the browser sends something like:
+
+username=swaliya&content=I+love+coding
+
+express.urlencoded() converts that data into a JavaScript object.
+
+So you can access:
+
+req.body
+
+For example:
+
+console.log(req.body);
+
+might give:
+
+{
+    username: "swaliya",
+    content: "I love coding"
+}
+Remember:
+HTML Form
+   ↓
+POST request
+   ↓
+express.urlencoded()
+   ↓
+req.body
+7. Configure EJS
+app.set("view engine","ejs");
+
+This tells Express:
+
+"I am using EJS as my template engine."
+
+EJS allows you to write HTML and insert JavaScript data into it.
+
+For example:
+
+<h1>Hello <%= username %></h1>
+
+If username is:
+
+"Swaliya"
+
+the browser receives:
+
+<h1>Hello Swaliya</h1>
+8. Tell Express where EJS files are
+app.set("views",path.join(__dirname,"views"));
+
+This tells Express:
+
+"My EJS files are inside the views folder."
+
+Your project probably looks something like:
+
+project
+│
+├── index.js
+│
+├── views
+│   ├── index.ejs
+│   ├── new.ejs
+│   └── show.ejs
+│
+└── public
+    ├── style.css
+    └── ...
+
+__dirname means:
+
+The directory where the current JavaScript file is located.
+
+9. Static files
+app.use(express.static(path.join(__dirname,"public")));
+
+This tells Express:
+
+"Allow the browser to access files inside my public folder."
+
+For example:
+
+public/style.css
+
+can be used in your EJS:
+
+<link rel="stylesheet" href="/style.css">
+
+It is commonly used for:
+
+CSS
+JavaScript files
+images
+10. Your posts array
+
+Now comes your temporary database:
+
+let posts = [
+    {
+        id: uuidv4(),
+        username : "apna college",
+        content :"I love coding"
+    },
+    {
+        id: uuidv4(),
+        username:"swaliyamujawar",
+        content:" i am a coder",
+    },
+    {
+        id: uuidv4(),
+        username:"shradhaakhapraa",
+        content:" I am a teacher",
+    },
+];
+
+You currently have 3 posts.
+
+Each post has:
+
+{
+    id,
+    username,
+    content
+}
+
+For example:
+
+{
+    id: "abc-123",
+    username: "swaliyamujawar",
+    content: "i am a coder"
+}
+Important:
+
+This is not a real database.
+
+It is just an array stored in your Node.js program.
+
+If you stop your server, these posts will disappear when the program restarts.
+
+Later, you can replace this with:
+
+MongoDB
+MySQL
+PostgreSQL
+etc.
+11. GET /posts
+app.get("/posts",(req,res)=>{
+    res.render("index.ejs",{posts});
+});
+
+This creates a route.
+
+It means:
+
+When someone sends a GET request to /posts, execute this function.
+
+For example, when you visit:
+
+http://localhost:8080/posts
+
+this route runs.
+
+What is req?
+req
+
+means:
+
+Request coming from the browser/client.
+
+What is res?
+res
+
+means:
+
+Response that your server sends back.
+
+12. res.render()
+res.render("index.ejs",{posts});
+
+This tells Express:
+
+Render the index.ejs file and send it to the browser.
+
+And:
+
+{posts}
+
+passes your posts array to EJS.
+
+This is shorthand for:
+
+{
+    posts: posts
+}
+
+So inside index.ejs, you can use:
+
+<% posts.forEach((post) => { %>
+
+    <h2><%= post.username %></h2>
+    <p><%= post.content %></p>
+
+<% }) %>
+13. GET /posts/new
+app.get("/posts/new",(req,res)=>{
+    res.render("new.ejs");
+})
+
+When the user visits:
+
+/posts/new
+
+Express renders:
+
+new.ejs
+
+This page is probably your Create New Post form.
+
+For example:
+
+<form action="/post" method="POST">
+
+    <input name="username">
+
+    <textarea name="content"></textarea>
+
+    <button>Submit</button>
+
+</form>
+14. POST /post
+
+Now the interesting part:
+
+app.post("/post",(req,res)=>{
+    let {username,content} = req.body;
+    let id = uuidv4();
+
+    posts.push({ id,username,content});
+
+    res.send("post requests working");
+    res.redirect("/posts");
+});
+
+This route handles the form submission.
+
+Step 1: User submits form
+
+Suppose the user enters:
+
+Username:
+Swaliya
+
+Content:
+I am learning backend
+
+The form sends a POST request to:
+
+/post
+15. Get data from req.body
+let {username,content} = req.body;
+
+Suppose:
+
+req.body
+
+contains:
+
+{
+    username: "Swaliya",
+    content: "I am learning backend"
+}
+
+Destructuring extracts:
+
+username
+
+and
+
+content
+
+So:
+
+username = "Swaliya"
+content = "I am learning backend"
+16. Generate ID
+let id = uuidv4();
+
+A unique ID is generated.
+
+For example:
+
+f8c9a7e2-....
+17. Add post to array
+posts.push({ id,username,content});
+
+This adds a new object to your posts array.
+
+Before:
+
+[
+    post1,
+    post2,
+    post3
+]
+
+After:
+
+[
+    post1,
+    post2,
+    post3,
+    newPost
+]
+⚠️ Important mistake in your code
+
+You wrote:
+
+res.send("post requests working");
+res.redirect("/posts");
+
+This is incorrect.
+
+Why?
+
+Because you are trying to send two responses for one request.
+
+res.send() already sends a response.
+
+Then you're trying to send another response using:
+
+res.redirect()
+
+That can cause:
+
+Error [ERR_HTTP_HEADERS_SENT]:
+Cannot set headers after they are sent to the client
+
+You should use only:
+
+res.redirect("/posts");
+
+So:
+
+app.post("/post",(req,res)=>{
+    let {username,content} = req.body;
+    let id = uuidv4();
+
+    posts.push({id, username, content});
+
+    res.redirect("/posts");
+});
+
+This means:
+
+Submit form
+     ↓
+POST /post
+     ↓
+Get req.body
+     ↓
+Create ID
+     ↓
+Add post
+     ↓
+Redirect to /posts
+     ↓
+Show all posts
+18. GET /posts/:id
+app.get("/posts/:id",(req,res)=>{
+    let {id} = req.params;
+    console.log(id);
+
+    let post = posts.find((p) => id === p.id);
+
+    res.render("show.ejs",{ post });
+});
+
+This is a dynamic route.
+
+The important part is:
+
+:id
+
+It means the ID can change.
+
+For example:
+
+/posts/123
+/posts/456
+/posts/abc
+
+All of these can match:
+
+/posts/:id
+19. req.params
+
+Suppose the browser visits:
+
+/posts/abc123
+
+Then:
+
+req.params
+
+will contain:
+
+{
+    id: "abc123"
+}
+
+So:
+
+let {id} = req.params;
+
+gives:
+
+id = "abc123"
+20. Find the post
+let post = posts.find((p) => id === p.id);
+
+This searches the posts array.
+
+Suppose:
+
+posts = [
+    {
+        id: "111",
+        username: "A",
+        content: "Hello"
+    },
+    {
+        id: "222",
+        username: "B",
+        content: "Coding"
+    }
+]
+
+And the URL is:
+
+/posts/222
+
+Then:
+
+id = "222"
+
+.find() checks each post:
+
+post 1 → 111 === 222 ❌
+
+post 2 → 222 === 222 ✅
+
+So:
+
+post
+
+becomes:
+
+{
+    id: "222",
+    username: "B",
+    content: "Coding"
+}
+21. Render show.ejs
+res.render("show.ejs",{ post });
+
+This sends the selected post to:
+
+show.ejs
+
+Inside show.ejs, you could do:
+
+<h1><%= post.username %></h1>
+
+<p><%= post.content %></p>
+
+So the user sees only that particular post.
+
+22. PATCH /posts/:id
+app.patch("/posts/:id",(req,res)=>{
+    res.send("patch request working");
+})
+
+This route is currently just a placeholder.
+
+PATCH is generally used to update an existing resource partially.
+
+For example:
+
+PATCH /posts/123
+
+could mean:
+
+Update the post whose ID is 123.
+
+Later, you might write something like:
+
+app.patch("/posts/:id",(req,res)=>{
+    let {id} = req.params;
+
+    let post = posts.find((p) => id === p.id);
+
+    // update post here
+
+    res.redirect("/posts");
+});
+
+You haven't implemented the actual update yet.
+
+23. Start the server
+app.listen(port, ()=>{
+    console.log("listening port 8080");
+});
+
+This starts your Express server.
+
+Since:
+
+port = 8080
+
+your server runs at:
+
+http://localhost:8080
+
+And you'll see:
+
+listening port 8080
+
+in your terminal.
+
+🧠 The MOST important part: understand the entire flow
+
+Your application works approximately like this:
+
+                 BROWSER
+                    │
+                    │
+                    ▼
+          http://localhost:8080
+                    │
+                    ▼
+               EXPRESS
+                    │
+        ┌───────────┼────────────┐
+        │           │            │
+        ▼           ▼            ▼
+   GET /posts  GET /posts/new  POST /post
+        │           │            │
+        ▼           ▼            ▼
+   index.ejs     new.ejs      req.body
+        │                        │
+        │                        ▼
+        │                    posts.push()
+        │                        │
+        │                        ▼
+        └──────────────────► /posts
+
+And for an individual post:
+
+Browser
+   │
+   │ GET /posts/123
+   ▼
+Express
+   │
+   ▼
+req.params.id
+   │
+   ▼
+posts.find()
+   │
+   ▼
+Find matching post
+   │
+   ▼
+show.ejs
+   │
+   ▼
+Browser
+🔥 Understand these 5 things first
+
+Since you're learning backend and feeling confused, don't try to memorize the whole code at once.
+
+Focus on these:
+
+1. req
+
+Information coming from the client.
+
+req.body
+req.params
+req.query
+2. res
+
+What your server sends back.
+
+res.send()
+res.render()
+res.redirect()
+res.json()
+3. Routes
+
+Routes decide:
+
+"What should happen when this URL receives this type of request?"
+
+app.get()
+app.post()
+app.patch()
+app.delete()
+4. req.body
+
+Data coming from forms/request body.
+
+let {username, content} = req.body;
+5. req.params
+
+Data coming from dynamic URLs.
+
+/posts/:id
+
+For:
+
+/posts/123
+
+you get:
+
+req.params.id
+// "123"
+One more important correction
+
+Your POST route should be:
+
+app.post("/post",(req,res)=>{
+    let {username,content} = req.body;
+
+    let id = uuidv4();
+
+    posts.push({
+        id,
+        username,
+        content
+    });
+
+    res.redirect("/posts");
+});
+
+Don't use both:
+
+res.send()
+res.redirect()
+
+for the same request.
+
+Your backend architecture right now
+
+You have:
+
+Node.js
+   ↓
+Express
+   ↓
+Routes
+   ↓
+EJS
+   ↓
+Temporary posts array
+
+Eventually, when you add MySQL, it becomes:
+
+Browser
+   ↓
+Express
+   ↓
+Route
+   ↓
+MySQL
+   ↓
+Database
+   ↓
+Express
+   ↓
+EJS / JSON
+   ↓
+Browser
