@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+
+    <style>
+        body{
+            background-color: beige;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <h2 id="question"></h2>
+
+    <input type="radio" name="answer" value="Mumbai">Mumbai<br>
+
+    <input type="radio" name="answer" value="Delhi">Delhi<br>
+
+    <input type="radio" name="answer" value="Chennai">Chennai<br>
+
+    <input type="radio" name="answer" value="Kolkata">Kolkata<br>
+
+    <button id="next">Submit Answer</button>
+    <h3 id="score"></h3>
+
+    <script>
+        const question = document.getElementById("question");
+        const score = document.getElementById("score");
+        const next = document.getElementById("next")
+
+        question.innerText = "What is the capital of India?";
+
+        let marks=0;
+
+        next.addEventListener("click", function(){
+            
+            const selected = document.querySelector(
+                'input[name="answer"]:checked'
+            );
+
+            if(selected.value === "Delhi"){
+                marks++;
+            }
+            score.innerText = "Score: "+ marks;
+        });
+        const selected = document.querySelector(
+            'input[name="answer"]:checked'
+        );
+
+        //cheak the answer
+
+        
+    </script>
+</body>
+</html>
