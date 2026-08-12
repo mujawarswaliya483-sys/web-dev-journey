@@ -1,5 +1,20 @@
+
+// let users = [];
+
+// for (let i = 0; i <= 100; i++) {
+//     users.push(getRandomUser()); 
+// }
+
+// let q = "INSERT INTO user (id, username, email, password) VALUES ?";
+
+
 const { faker } = require("@faker-js/faker");
 const mysql = require("mysql2");
+const express = require("express");
+const app = express();
+const path = require("path")
+app.set("view engine","ejs");
+app.set("views",path.join(__dirname,"/views"));
 
 const connection = mysql.createConnection({
     host: "localhost",
@@ -8,29 +23,28 @@ const connection = mysql.createConnection({
     password: "swaliya123",
 });
 
-let q = "SHOW TABLES";
+let getRandomUser = () => {
+    return [
+        faker.string.uuid(),
+        faker.internet.username(),
+        faker.internet.email(),
+        faker.internet.password(),
+    ];
+};    
+   app.get("/", (req, res) => {
+    let q = "SELECT COUNT(*) FROM user";
 
-connection.query(q, (err, result) => {
-    if (err) {
+    connection.query(q, (err, result) => {
+        if (err) {
+            let count = result[0]["count(*)"];
+            res.send("home.ejs",{count});
+        }
+
         console.log(err);
-        return;
-    }
-
-    console.log(result);
-     console.log(result.length);
-      console.log(result[0]);
-       console.log(result[1]);
+        res.render("spme error in db");
+    });
 });
 
-connection.end();
-
-let getRandomUser = () => {
-    return {
-        Id: faker.string.uuid(),
-        username: faker.internet.username(),
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-    };
-};
-
-console.log(getRandomUser());
+app.listen(8080, () => {
+    console.log("Server is listening to port 8080");
+});
