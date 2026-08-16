@@ -22,12 +22,28 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User",userSchema);
 
-User.findById('6a8058ffa810e5353e24f464')
-.then(res =>{
+// UPDATE INMONGOOSE
+
+// User.updateMany({ age: { $gt:48 } },{ age:55 })
+// .then((res)=>{
+//     console.log(res);
+// }).catch((err)=>{
+//     console.log(err);
+// });
+
+User.deleteMany({name:"swaliya"})
+.then((res)=>{
     console.log(res);
-}).catch((err)=>{
+}).catch((res)=>{
     console.log(err);
 });
+// User.findById('6a8058ffa810e5353e24f464')
+// .then(res =>{
+//     console.log(res);
+// }).catch((err)=>{
+//     console.log(err);
+// });
+
 
 // INSERTING MANY
 // const User = mongoose.model("User",userSchema);
