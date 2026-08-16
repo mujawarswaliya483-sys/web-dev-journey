@@ -1,0 +1,1212 @@
+
+📘 Express.js — Detailed & Easy Revision Notes
+
+Your screenshot covers:
+
+1. What is Express?
+
+2. Getting Started with Express
+
+3. Handling Requests
+
+4. Sending a Response
+
+5. Routing
+
+6. Installing Nodemon
+
+7. Path Parameters
+
+8. Query Strings
+
+
+1. First understand: Why do we need Express?
+
+You already learned Node.js.
+
+With Node.js alone, we can create a server using the built-in http module.
+
+For example:
+
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+    res.send("Hello");
+});
+
+server.listen(3000);
+
+This works.
+
+But as your backend becomes bigger, handling everything using the raw http module becomes inconvenient.
+
+Imagine you need:
+
+GET /users
+GET /products
+GET /products/10
+POST /users
+DELETE /users/5
+...
+
+Managing all these requests manually becomes difficult.
+
+Express solves this problem.
+
+Node.js
+   ↓
+Provides runtime
+   ↓
+Express.js
+   ↓
+Makes server/backend development easier
+
+---
+
+2. What is Express.js?
+
+Definition
+
+Express.js is a lightweight and minimal web framework for Node.js used to build web servers, APIs, and backend applications.
+
+It runs on top of Node.js.
+
+Very important:
+
+Express is NOT a replacement for Node.js.
+
+Instead:
+
+Node.js
+   ↓
+Runtime environment
+
+Express.js
+   ↓
+Framework built for Node.js
+
+Think of it like:
+
+> Node.js gives you the basic tools; Express gives you convenient tools for building web applications and APIs.
+
+---
+
+3. Node.js vs Express.js
+
+This is a common interview question.
+
+Node.js	                                     Express.js
+
+Runtime environment	                         Web framework
+Runs JavaScript outside browser	             Helps build web applications/APIs
+Provides core modules	                     Provides convenient routing/request/response APIs
+Can create server using http	             Makes server development easier
+Lower-level	                                 Higher-level abstraction
+
+
+Easy memory trick
+
+Node.js = Foundation
+
+Express.js = Framework built on that foundation
+
+---
+
+4. Getting Started with Express
+
+First create a project.
+
+mkdir express-app
+cd express-app
+
+Initialize npm:
+
+npm init -y
+
+Install Express:
+
+npm install express
+
+Your folder will look something like:
+
+express-app/
+│
+├── node_modules/
+├── package.json
+├── package-lock.json
+└── app.js
+
+---
+
+5. Creating Your First Express Server
+
+Create:
+
+app.js
+
+Write:
+
+const express = require("express");
+
+const app = express();
+
+app.listen(3000, () => {
+    console.log("Server started");
+});
+
+Let's understand this line by line.
+
+---
+
+Line 1
+
+const express = require("express");
+
+We import Express.
+
+Remember your Node.js module concept:
+
+require()
+   ↓
+Import module
+
+---
+
+Line 2
+
+const app = express();
+
+express() creates an Express application.
+
+We store it in:
+
+app
+
+Think:
+
+express()
+    ↓
+Express application
+    ↓
+   app
+
+app will be used to:
+
+Define routes
+
+Handle requests
+
+Send responses
+
+Start the server
+
+Add middleware
+
+---
+
+Line 3
+
+app.listen(3000, () => {
+    console.log("Server started");
+});
+
+This starts the server on port 3000.
+
+Now open:
+
+http://localhost:3000
+
+Your Express server is running.
+
+---
+
+6. What is a Port?
+
+A port is like a door/number through which your application can receive network requests.
+
+For example:
+
+localhost:3000
+
+Here:
+
+localhost → your computer
+
+3000 → port number
+
+Other common development ports:
+
+3000
+5000
+8000
+8080
+
+---
+
+7. Handling Requests
+
+Now we want our server to respond when someone visits a URL.
+
+Express provides methods like:
+
+app.get()
+app.post()
+app.put()
+app.delete()
+
+These correspond to HTTP methods.
+
+For example:
+
+app.get("/", (req, res) => {
+    res.send("Hello World");
+});
+
+Let's understand it.
+
+---
+
+app.get()
+
+app.get(path, callback)
+
+It handles a GET request for the specified path.
+
+Here:
+
+app.get("/", ...)
+
+means:
+
+> When someone sends a GET request to /, execute this function.
+
+---
+
+req
+
+(req, res)
+
+req means:
+
+> Request
+
+It contains information sent by the client.
+
+For example:
+
+URL
+
+parameters
+
+query strings
+
+headers
+
+request body
+
+
+---
+
+res
+
+res means:
+
+> Response
+
+It is used to send something back to the client.
+
+---
+
+8. Sending a Response
+
+The simplest way:
+
+res.send()
+
+Example:
+
+app.get("/", (req, res) => {
+    res.send("Welcome to my website");
+});
+
+When you visit:
+
+http://localhost:3000/
+
+you receive:
+
+Welcome to my website
+
+---
+
+9. Complete Basic Express Program
+
+This is extremely important for revision.
+
+const express = require("express");
+
+const app = express();
+
+app.get("/", (req, res) => {
+    res.send("Home Page");
+});
+
+app.listen(3000, () => {
+    console.log("Server running on port 3000");
+});
+
+Flow:
+
+Browser
+   │
+   │ GET /
+   ↓
+Express Server
+   │
+   ↓
+app.get("/")
+   │
+   ↓
+res.send()
+   │
+   ↓
+Browser receives response
+
+---
+
+10. Routing
+
+Now we come to one of the most important Express concepts.
+
+What is Routing?
+
+Routing means:
+
+> Defining how your application responds to requests for different URLs and HTTP methods.
+
+Suppose you have:
+
+/
+ /about
+ /contact
+ /products
+ /users
+
+You can create different routes.
+
+app.get("/", (req, res) => {
+    res.send("Home Page");
+});
+
+app.get("/about", (req, res) => {
+    res.send("About Page");
+});
+
+app.get("/contact", (req, res) => {
+    res.send("Contact Page");
+});
+
+app.get("/products", (req, res) => {
+    res.send("Products Page");
+});
+
+Now:
+
+GET /
+     ↓
+Home Page
+
+GET /about
+     ↓
+About Page
+
+GET /contact
+     ↓
+Contact Page
+
+GET /products
+     ↓
+Products Page
+
+That's routing.
+
+
+---
+
+11. HTTP Methods in Express
+
+You will frequently use these:
+
+GET
+
+Used to retrieve data.
+
+app.get("/users", (req, res) => {
+    res.send("Get users");
+});
+
+Example:
+
+GET /users
+
+---
+
+POST
+
+Used to send/create data.
+
+app.post("/users", (req, res) => {
+    res.send("Create user");
+});
+
+---
+
+PUT
+
+Usually used to update an existing resource.
+
+app.put("/users/1", (req, res) => {
+    res.send("Update user");
+});
+
+
+---
+
+DELETE
+
+Used to delete data.
+
+app.delete("/users/1", (req, res) => {
+    res.send("Delete user");
+});
+
+Remember:
+
+GET     → Read
+POST    → Create
+PUT     → Update
+DELETE  → Delete
+
+This becomes very important when you start building REST APIs.
+
+---
+
+12. Path Parameters
+
+This is another very important topic from your screenshot.
+
+Suppose you have:
+
+/products/101
+/products/102
+/products/103
+
+Instead of creating separate routes:
+
+app.get("/products/101", ...)
+app.get("/products/102", ...)
+app.get("/products/103", ...)
+
+we can use a path parameter.
+
+app.get("/products/:id", (req, res) => {
+    res.send(`Product ID: ${req.params.id}`);
+});
+
+Here:
+
+:id
+
+is a path parameter.
+
+---
+
+Example
+
+Visit:
+
+/products/101
+
+Then:
+
+req.params.id
+
+will contain:
+
+101
+
+Visit:
+
+/products/500
+
+Then:
+
+req.params.id
+
+will contain:
+
+500
+
+Flow
+
+/products/:id
+       ↓
+      id
+       ↓
+req.params.id
+
+
+---
+
+13. Multiple Path Parameters
+
+You can have multiple parameters.
+
+app.get("/users/:userId/posts/:postId", (req, res) => {
+
+    res.send(
+        `User: ${req.params.userId}, Post: ${req.params.postId}`
+    );
+
+});
+
+Visit:
+
+/users/10/posts/50
+
+Then:
+
+req.params.userId
+
+is:
+
+10
+
+and:
+
+req.params.postId
+
+is:
+
+50
+
+
+---
+
+14. Query Strings
+
+Now we have another way to send information through a URL.
+
+Example:
+
+/products?category=shoes
+
+Here:
+
+?category=shoes
+
+is a query string.
+
+Query parameters are available through:
+
+req.query
+
+Example:
+
+app.get("/products", (req, res) => {
+    console.log(req.query);
+    res.send("Products");
+});
+
+Visit:
+
+/products?category=shoes
+
+req.query will contain something conceptually like:
+
+{
+    category: "shoes"
+}
+
+
+---
+
+15. Multiple Query Parameters
+
+Example URL:
+
+/products?category=shoes&price=1000
+
+Then:
+
+req.query
+
+contains:
+
+{
+    category: "shoes",
+    price: "1000"
+}
+
+You can access:
+
+req.query.category
+
+and:
+
+req.query.price
+
+
+---
+
+16. Path Parameters vs Query Strings
+
+This is very important because beginners often confuse them.
+
+Path parameter
+
+URL:
+
+/users/25
+
+Code:
+
+app.get("/users/:id", (req, res) => {
+    console.log(req.params.id);
+});
+
+Access:
+
+req.params.id
+
+
+---
+
+Query parameter
+
+URL:
+
+/users?id=25
+
+Code:
+
+app.get("/users", (req, res) => {
+    console.log(req.query.id);
+});
+
+Access:
+
+req.query.id
+
+Easy comparison
+
+Path Parameter	Query String
+
+/users/25	/users?id=25
+Defined in route	Added after ?
+req.params	req.query
+Often identifies a specific resource	Often used for filtering/searching/options
+
+
+Example:
+
+/products/25
+
+means:
+
+> Give me product 25.
+
+
+
+Whereas:
+
+/products?category=shoes
+
+means:
+
+> Give me products filtered by shoes.
+
+---
+
+17. Nodemon
+
+Normally, when you change your code, you have to restart Node manually.
+
+For example:
+
+node app.js
+
+Then change:
+
+res.send("Hello");
+
+to:
+
+res.send("Hello World");
+
+You would need to stop and restart the server.
+
+That's annoying.
+
+Nodemon solves this.
+
+Nodemon automatically restarts your Node application when it detects file changes.
+
+
+---
+
+18. Installing Nodemon
+
+You can install it as a development dependency:
+
+npm install -D nodemon
+
+or:
+
+npm install --save-dev nodemon
+
+Then in package.json:
+
+{
+    "scripts": {
+        "dev": "nodemon app.js"
+    }
+}
+
+Run:
+
+npm run dev
+
+Now Nodemon watches your files.
+
+When you save changes:
+
+Code changes
+     ↓
+Nodemon detects change
+     ↓
+Server restarts automatically
+
+Remember
+
+node app.js
+   ↓
+Manual restart
+
+nodemon app.js
+   ↓
+Automatic restart
+
+
+---
+
+19. res.send() — Sending Response
+
+The response can contain different kinds of data.
+
+String
+
+res.send("Hello");
+
+HTML
+
+res.send("<h1>Hello</h1>");
+
+Object / JSON
+
+For APIs, you'll commonly use:
+
+res.json({
+    name: "Swaliya",
+    age: 20
+});
+
+This sends JSON data.
+
+
+---
+
+20. Request and Response — Understand This Properly
+
+This is the heart of backend development.
+
+Suppose you open:
+
+http://localhost:3000/users
+
+The browser/client sends a:
+
+REQUEST
+
+to your server.
+
+Express receives it:
+
+Client
+   ↓
+Request
+   ↓
+Express
+   ↓
+Route handler
+   ↓
+Response
+   ↓
+Client
+
+In code:
+
+app.get("/users", (req, res) => {
+
+    // req = information from client
+
+    // res = send information back
+
+    res.send("Users");
+});
+
+Think:
+
+req → What did the client ask/send?
+
+res → What should I send back?
+
+This simple mental model will help you enormously when you start REST APIs.
+
+
+---
+
+21. Complete Express Example
+
+Let's combine almost everything from your screenshot.
+
+const express = require("express");
+
+const app = express();
+
+app.get("/", (req, res) => {
+    res.send("Home Page");
+});
+
+app.get("/about", (req, res) => {
+    res.send("About Page");
+});
+
+app.get("/users/:id", (req, res) => {
+    res.send(`User ID: ${req.params.id}`);
+});
+
+app.get("/products", (req, res) => {
+
+    console.log(req.query);
+
+    res.send("Products Page");
+});
+
+app.listen(3000, () => {
+    console.log("Server running on port 3000");
+});
+
+Now try:
+
+URL 1
+
+/
+
+Response:
+
+Home Page
+
+URL 2
+
+/about
+
+Response:
+
+About Page
+
+URL 3
+
+/users/25
+
+Response:
+
+User ID: 25
+
+URL 4
+
+/products?category=shoes
+
+req.query contains:
+
+{
+    category: "shoes"
+}
+
+
+---
+
+🧠 Express Mental Model
+
+This is the most important diagram for your revision:
+
+EXPRESS.JS
+                         │
+                         ↓
+                Express Application
+                         │
+                         ↓
+                  Incoming Request
+                         │
+               ┌─────────┴─────────┐
+               ↓                   ↓
+          HTTP Method            URL
+          GET/POST/...        /users/10
+               │                   │
+               └─────────┬─────────┘
+                         ↓
+                       ROUTE
+                         │
+                         ↓
+                 Route Handler
+                  (req, res)
+                    /     \
+                   /       \
+                  ↓         ↓
+                req        res
+                 │           │
+          Request data     Response
+                 │           │
+          params/query      send/json
+                 │           │
+                 └─────┬─────┘
+                       ↓
+                     Client
+
+
+---
+
+⭐ Quick Revision Sheet
+
+Express
+
+> Express.js is a lightweight web framework for Node.js used to build servers, web applications and APIs.
+
+
+
+
+---
+
+Install Express
+
+npm install express
+
+
+---
+
+Import Express
+
+const express = require("express");
+
+
+---
+
+Create app
+
+const app = express();
+
+
+---
+
+Start server
+
+app.listen(3000, () => {
+    console.log("Server started");
+});
+
+
+---
+
+GET route
+
+app.get("/", (req, res) => {
+    res.send("Hello");
+});
+
+
+---
+
+POST route
+
+app.post("/users", (req, res) => {
+    res.send("User created");
+});
+
+
+---
+
+PUT route
+
+app.put("/users/:id", (req, res) => {
+    res.send("User updated");
+});
+
+
+---
+
+DELETE route
+
+app.delete("/users/:id", (req, res) => {
+    res.send("User deleted");
+});
+
+
+---
+
+Path parameter
+
+URL:
+
+/users/10
+
+Route:
+
+app.get("/users/:id", (req, res) => {
+    console.log(req.params.id);
+});
+
+Access:
+
+req.params.id
+
+
+---
+
+Query string
+
+URL:
+
+/users?name=Swaliya
+
+Access:
+
+req.query.name
+
+
+---
+
+Response
+
+res.send("Hello");
+
+or:
+
+res.json({
+    message: "Hello"
+});
+
+
+---
+
+Nodemon
+
+Install:
+
+npm install -D nodemon
+
+Run:
+
+npx nodemon app.js
+
+or add an npm script and use:
+
+npm run dev
+
+
+---
+
+🔥 Node.js → Express.js Connection
+
+Since you're learning these topics one after another, keep this connection in your head:
+
+JAVASCRIPT
+                        │
+                        ↓
+                    NODE.JS
+              Runtime Environment
+                        │
+                        ↓
+                   EXPRESS.JS
+                    Framework
+                        │
+             ┌──────────┼──────────┐
+             ↓          ↓          ↓
+          Routing    Requests    Responses
+             │          │          │
+             ↓          ↓          ↓
+         /users       req       res.send()
+         /products    req.params res.json()
+         /about       req.query
+                        │
+                        ↓
+                    REST APIs
+                        │
+                        ↓
+                    Database
+                        │
+                        ↓
+                     MongoDB
+
+This is the progression you're heading toward in your Sigma course.
+
+So don't worry if concepts like req, res, routes, params, and query initially feel confusing. They become much easier once you start building a small API.
+
+🎯 Before moving to the next Express topic, make sure you can answer:
+
+1. What is Express.js?
+
+
+2. Why do we use Express when Node.js already exists?
+
+
+3. How do you create an Express application?
+
+
+4. What is app.listen()?
+
+
+5. What is a route?
+
+
+6. What is req?
+
+
+7. What is res?
+
+
+8. What is app.get()?
+
+
+9. Difference between GET and POST?
+
+
+10. What are path parameters?
+
+
+11. What is req.params?
+
+
+12. What is a query string?
+
+
+13. What is req.query?
+
+
+14. Difference between req.params and req.query?
+
+
+15. What is Nodemon and why do we use it?
+
+
+
+If these 15 are clear, you have a very solid foundation for REST APIs, which is the part you were previously finding difficult.

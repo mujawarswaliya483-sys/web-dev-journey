@@ -1,0 +1,1369 @@
+  
+📘 Node.js — Complete Revision Notes
+
+0. First understand: What is Node.js?
+
+Before studying the individual topics, remember this:
+
+JavaScript normally runs where?
+
+Traditionally, JavaScript runs inside a browser.
+
+For example:
+
+console.log("Hello");
+
+The browser's JavaScript engine executes this code.
+
+But JavaScript was mainly designed for browser-side programming.
+
+Then what is Node.js?
+
+Node.js allows JavaScript to run outside the browser.
+
+It is a JavaScript runtime environment built using the V8 JavaScript engine.
+
+So:
+
+JavaScript
+     ↓
+Node.js
+     ↓
+Can run JavaScript outside browser
+     ↓
+Can build backend/server applications
+
+Example
+
+With Node.js, you can create:
+
+Web servers
+
+REST APIs
+
+Backend applications
+
+File handling programs
+
+Authentication systems
+
+Database-connected applications
+
+Real-time applications
+
+Command-line tools
+
+
+Very important distinction
+
+Thing	Meaning
+
+JavaScript	Programming language
+Node.js	Runtime environment for JavaScript
+Express.js	Backend framework built on Node.js
+npm	Package manager for Node.js
+MongoDB	Database
+
+
+Think:
+
+JavaScript
+     ↓
+   Node.js
+     ↓
+ Express.js
+     ↓
+ Backend/API
+     ↓
+ MongoDB
+
+
+---
+
+1. What is Node.js?
+
+Definition
+
+Node.js is an open-source, cross-platform JavaScript runtime environment that allows JavaScript code to execute outside the browser.
+
+Node.js uses Google's V8 JavaScript engine.
+
+Why was Node.js created?
+
+Before Node.js:
+
+Browser
+  ↓
+JavaScript
+
+JavaScript was primarily used for frontend development.
+
+After Node.js:
+
+Browser
+  ↓
+Frontend JavaScript
+
+Node.js
+  ↓
+Backend JavaScript
+
+Now the same language can be used on both sides.
+
+JavaScript
+          /        \
+         /          \
+    Frontend       Backend
+    Browser        Node.js
+
+Example
+
+Create:
+
+app.js
+
+Write:
+
+console.log("Hello from Node.js");
+
+Run:
+
+node app.js
+
+Output:
+
+Hello from Node.js
+
+Notice that you didn't open a browser.
+
+That's the important idea.
+
+
+---
+
+2. Node Installation
+
+To use Node.js, you need to install it on your computer.
+
+After installation, two important commands are available:
+
+Check Node version
+
+node -v
+
+Example:
+
+v22.x.x
+
+This tells you that Node.js is installed.
+
+Check npm version
+
+npm -v
+
+Example:
+
+10.x.x
+
+npm usually comes with Node.js.
+
+Remember
+
+Node.js → runs JavaScript
+
+npm → manages packages
+
+
+---
+
+3. Node REPL
+
+REPL stands for:
+
+> Read – Eval – Print – Loop
+
+
+
+Node provides an interactive environment where you can directly write JavaScript commands.
+
+Open terminal and type:
+
+node
+
+You'll see something like:
+
+>
+
+Now you can write:
+
+2 + 3
+
+Output:
+
+5
+
+Try:
+
+console.log("Hello");
+
+Output:
+
+Hello
+
+Try:
+
+let name = "Swaliya";
+name
+
+Output:
+
+'Swaliya'
+
+Why is REPL useful?
+
+It is useful for:
+
+Testing small pieces of JavaScript
+
+Checking syntax
+
+Trying Node.js features
+
+Experimenting with functions
+
+Quickly testing expressions
+
+
+Exit REPL
+
+You can use:
+
+Ctrl + C
+
+twice, or:
+
+.exit
+
+Remember
+
+node
+ ↓
+REPL starts
+ ↓
+Write JavaScript directly
+ ↓
+Immediately see result
+
+
+---
+
+4. Node Files
+
+Instead of writing JavaScript one line at a time in REPL, we normally create .js files.
+
+For example:
+
+app.js
+
+Inside:
+
+console.log("Hello Node.js");
+
+Then open terminal in that folder and run:
+
+node app.js
+
+Output:
+
+Hello Node.js
+
+Important
+
+You don't need:
+
+<script>
+
+You don't need a browser.
+
+Node directly executes the JavaScript file.
+
+Example
+
+app.js
+
+let a = 10;
+let b = 20;
+
+console.log(a + b);
+
+Run:
+
+node app.js
+
+Output:
+
+30
+
+
+---
+
+5. Process in Node.js
+
+This is an important Node.js concept.
+
+Node provides a built-in object called:
+
+process
+
+It gives information about the currently running Node.js process.
+
+What is a process?
+
+A process is basically a running program.
+
+When you execute:
+
+node app.js
+
+your app.js is running as a process.
+
+Node provides information about that process through:
+
+process
+
+
+---
+
+process.argv
+
+One of the most useful properties is:
+
+process.argv
+
+It contains command-line arguments.
+
+Example:
+
+console.log(process.argv);
+
+Run:
+
+node app.js hello
+
+You will get an array containing information about the Node executable, your file, and "hello".
+
+Conceptually:
+
+process.argv
+
+[
+   node path,
+   app.js path,
+   hello
+]
+
+So you can access your argument using:
+
+console.log(process.argv[2]);
+
+If you run:
+
+node app.js Swaliya
+
+Output:
+
+Swaliya
+
+Example
+
+let name = process.argv[2];
+
+console.log("Hello", name);
+
+Run:
+
+node app.js Swaliya
+
+Output:
+
+Hello Swaliya
+
+
+---
+
+Other useful process properties
+
+process.cwd()
+
+Returns the current working directory.
+
+console.log(process.cwd());
+
+process.platform
+
+Tells you the operating system platform.
+
+console.log(process.platform);
+
+process.exit()
+
+Terminates the Node.js process.
+
+process.exit();
+
+Quick revision
+
+process
+   ↓
+Information/control about current Node program
+
+process.argv → command-line arguments
+process.cwd() → current working directory
+process.platform → operating system
+process.exit() → stop process
+
+
+---
+
+6. Export in Files
+
+Now we reach a VERY important Node.js concept: Modules.
+
+Imagine your project becomes large.
+
+Instead of putting everything into:
+
+app.js
+
+you divide your code into different files.
+
+For example:
+
+app.js
+math.js
+user.js
+product.js
+
+Each file can contain separate functionality.
+
+This is called modular programming.
+
+
+---
+
+Why modules?
+
+Suppose math.js contains:
+
+let add = (a, b) => {
+    return a + b;
+};
+
+But you want to use add() in another file.
+
+You need to export it from math.js.
+
+math.js
+
+let add = (a, b) => {
+    return a + b;
+};
+
+module.exports = add;
+
+Now add is available to other files.
+
+
+---
+
+7. Importing a Module
+
+In another file:
+
+app.js
+
+const add = require("./math");
+
+console.log(add(10, 20));
+
+Output:
+
+30
+
+The flow is:
+
+math.js
+   ↓
+module.exports
+   ↓
+Export add function
+   ↓
+app.js
+   ↓
+require("./math")
+   ↓
+Use add()
+
+Very important
+
+In CommonJS Node.js:
+
+module.exports
+
+is used to export.
+
+And:
+
+require()
+
+is used to import.
+
+Remember:
+
+EXPORT → module.exports
+
+IMPORT → require()
+
+
+---
+
+8. Export Multiple Things from a File
+
+Suppose:
+
+math.js
+
+let add = (a, b) => {
+    return a + b;
+};
+
+let sub = (a, b) => {
+    return a - b;
+};
+
+module.exports = {
+    add,
+    sub
+};
+
+Now import them:
+
+app.js
+
+const math = require("./math");
+
+console.log(math.add(10, 5));
+console.log(math.sub(10, 5));
+
+Output:
+
+15
+5
+
+You can also write:
+
+const { add, sub } = require("./math");
+
+console.log(add(10, 5));
+console.log(sub(10, 5));
+
+
+---
+
+9. Export in Directories
+
+As projects become larger, we may have multiple files inside folders.
+
+Example:
+
+project
+│
+├── app.js
+│
+└── math
+    ├── add.js
+    ├── sub.js
+    └── index.js
+
+Suppose:
+
+add.js
+
+module.exports = function add(a, b) {
+    return a + b;
+};
+
+sub.js
+
+module.exports = function sub(a, b) {
+    return a - b;
+};
+
+Instead of importing every file individually, we can create:
+
+index.js
+
+const add = require("./add");
+const sub = require("./sub");
+
+module.exports = {
+    add,
+    sub
+};
+
+Now index.js acts like the entry point for that directory/module.
+
+From app.js:
+
+const math = require("./math");
+
+console.log(math.add(10, 5));
+console.log(math.sub(10, 5));
+
+Conceptually:
+
+math folder
+    │
+    ├── add.js
+    ├── sub.js
+    │
+    └── index.js
+          │
+          ↓
+      combines exports
+          │
+          ↓
+        app.js
+
+Why is this useful?
+
+It keeps large projects organized.
+
+Instead of:
+
+app.js
+ ↓
+add.js
+sub.js
+multiply.js
+divide.js
+...
+
+you can organize:
+
+math/
+   add.js
+   sub.js
+   multiply.js
+   divide.js
+   index.js
+
+
+---
+
+10. What is npm?
+
+npm stands for:
+
+> Node Package Manager
+
+
+
+It is used to:
+
+Install packages
+
+Manage packages
+
+Remove packages
+
+Update packages
+
+Manage project dependencies
+
+
+What is a package?
+
+A package is reusable code written by someone else that you can use in your project.
+
+For example, instead of writing everything yourself, you can install a package that provides a particular functionality.
+
+
+---
+
+Example
+
+Suppose you want to use Express.
+
+You can install it using:
+
+npm install express
+
+npm downloads Express and makes it available to your project.
+
+Then:
+
+const express = require("express");
+
+Now you can use Express.
+
+Remember
+
+npm
+ ↓
+Package Manager
+ ↓
+Install/manage reusable code
+
+
+---
+
+11. Installing Packages
+
+The basic command is:
+
+npm install package-name
+
+For example:
+
+npm install express
+
+Short form:
+
+npm i express
+
+Both are commonly used.
+
+
+---
+
+What happens after installation?
+
+Suppose your project initially contains:
+
+project/
+    app.js
+
+After:
+
+npm install express
+
+you'll generally see:
+
+project/
+│
+├── app.js
+├── package.json
+├── package-lock.json
+└── node_modules/
+
+node_modules
+
+Contains the installed packages and their dependencies.
+
+package.json
+
+Contains information about your project and its dependencies.
+
+package-lock.json
+
+Records the dependency tree and resolved versions so installations can be reproduced more consistently.
+
+
+---
+
+12. package.json
+
+This is one of the most important files in a Node.js project.
+
+It contains information about your project.
+
+Example:
+
+{
+  "name": "my-project",
+  "version": "1.0.0",
+  "description": "My Node project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^5.0.0"
+  }
+}
+
+Don't try to memorize every field now.
+
+Understand the important ones.
+
+
+---
+
+name
+
+Project name.
+
+"name": "my-project"
+
+
+---
+
+version
+
+Version of your project.
+
+"version": "1.0.0"
+
+
+---
+
+description
+
+Description of the project.
+
+"description": "My backend project"
+
+
+---
+
+main
+
+The main entry file.
+
+"main": "app.js"
+
+
+---
+
+scripts
+
+Commands that you can run using npm.
+
+Example:
+
+"scripts": {
+    "start": "node app.js"
+}
+
+Then:
+
+npm start
+
+will execute:
+
+node app.js
+
+
+---
+
+dependencies
+
+Packages required by your project.
+
+Example:
+
+"dependencies": {
+    "express": "^5.0.0"
+}
+
+This tells npm that your project depends on Express.
+
+
+---
+
+13. Creating package.json
+
+You can create it using:
+
+npm init
+
+npm will ask you several questions.
+
+Or use:
+
+npm init -y
+
+This automatically creates a default package.json.
+
+Remember
+
+npm init
+     ↓
+Create package.json
+
+
+---
+
+14. Local vs Global Installation
+
+This is another important topic.
+
+Local installation
+
+When you run:
+
+npm install express
+
+the package is installed inside your current project.
+
+Usually:
+
+project/
+   node_modules/
+       express/
+
+This is called a local installation.
+
+Why local?
+
+Because different projects can require different package versions.
+
+Example:
+
+Project A → Express version X
+
+Project B → Express version Y
+
+That's why project dependencies are normally installed locally.
+
+
+---
+
+15. Global Installation
+
+You can install a package globally using:
+
+npm install -g package-name
+
+Here:
+
+-g
+
+means:
+
+> global
+
+
+
+Example:
+
+npm install -g nodemon
+
+A globally installed command can be available across projects.
+
+Local vs Global
+
+Local	Global
+
+Installed for one project	Installed for broader system use
+Stored in project's dependency setup	Installed globally
+Common for project libraries	Useful for CLI tools
+Example: Express	Example: certain command-line tools
+
+
+Important practical rule
+
+For libraries your application uses in its code, prefer local installation.
+
+
+---
+
+16. Import Modules
+
+Now connect everything together.
+
+Node.js applications are often divided into modules.
+
+A module is basically a reusable piece of code.
+
+Example:
+
+app.js
+math.js
+user.js
+database.js
+
+Each file can represent a module.
+
+
+---
+
+Import your own module
+
+Suppose:
+
+math.js
+
+module.exports = {
+    add: (a, b) => a + b
+};
+
+app.js
+
+const math = require("./math");
+
+console.log(math.add(2, 3));
+
+Output:
+
+5
+
+The ./ means:
+
+> Look in the current directory.
+
+
+
+
+---
+
+17. Built-in Node.js Modules
+
+Node.js also provides modules that you don't need to install.
+
+Examples:
+
+fs
+path
+os
+http
+events
+
+fs
+
+File system operations.
+
+const fs = require("fs");
+
+Used for:
+
+Reading files
+
+Writing files
+
+Creating files
+
+Deleting files
+
+
+
+---
+
+path
+
+Works with file and directory paths.
+
+const path = require("path");
+
+
+---
+
+os
+
+Provides operating-system information.
+
+const os = require("os");
+
+
+---
+
+http
+
+Used to create HTTP servers.
+
+const http = require("http");
+
+This becomes very important when you start creating backend servers.
+
+
+---
+
+🧠 The BIG Picture
+
+Don't study these topics as separate things.
+
+Understand how they connect:
+
+NODE.JS
+                       │
+         JavaScript Runtime Environment
+                       │
+          ┌────────────┴────────────┐
+          ↓                         ↓
+      Node REPL                 Node Files
+          │                         │
+    Test JS quickly          app.js / server.js
+                                    │
+                                    ↓
+                                Modules
+                              /         \
+                         Export          Import
+                           │               │
+                   module.exports       require()
+                           │               │
+                           └───────┬───────┘
+                                   ↓
+                                npm
+                                   │
+                         Install packages
+                                   ↓
+                              package.json
+                                   │
+                          Project information
+                                   │
+                  ┌────────────────┴────────────┐
+                  ↓                             ↓
+              Dependencies               Scripts
+                  │
+                  ↓
+             node_modules
+
+
+---
+
+⭐ Super Important Revision Sheet
+
+When revising before an exam/interview, remember these:
+
+Node.js
+
+> JavaScript runtime environment that allows JavaScript to run outside the browser.
+
+
+
+Node REPL
+
+Read
+Eval
+Print
+Loop
+
+Used to execute JavaScript interactively.
+
+Run a Node file
+
+node app.js
+
+Process
+
+process
+
+Represents the current Node.js process.
+
+Important:
+
+process.argv
+process.cwd()
+process.platform
+process.exit()
+
+Module
+
+A reusable piece of code.
+
+Export
+
+module.exports = something;
+
+Import
+
+const something = require("./file");
+
+npm
+
+> Node Package Manager — used to install and manage packages.
+
+
+
+npm install express
+
+package.json
+
+> Contains project information, scripts, dependencies, etc.
+
+
+
+Create:
+
+npm init
+
+or:
+
+npm init -y
+
+Local installation
+
+npm install package-name
+
+Global installation
+
+npm install -g package-name
+
+Built-in modules
+
+Examples:
+
+fs
+path
+os
+http
+events
+
+
+---
+
+🔥 Commands You Should Know
+
+Keep this small command list for revision:
+
+# Check Node
+node -v
+
+# Check npm
+npm -v
+
+# Start Node REPL
+node
+
+# Run JS file
+node app.js
+
+# Create package.json
+npm init
+
+# Create package.json with defaults
+npm init -y
+
+# Install package locally
+npm install express
+
+# Short form
+npm i express
+
+# Install globally
+npm install -g nodemon
+
+# Install a package as a development dependency
+npm install -D nodemon
+
+
+---
+
+🧩 One Small Project to Connect All These Concepts
+
+Create:
+
+node-practice/
+│
+├── app.js
+├── math.js
+├── package.json
+└── package-lock.json
+
+math.js
+
+let add = (a, b) => {
+    return a + b;
+};
+
+let multiply = (a, b) => {
+    return a * b;
+};
+
+module.exports = {
+    add,
+    multiply
+};
+
+app.js
+
+const math = require("./math");
+
+console.log(math.add(10, 20));
+console.log(math.multiply(5, 4));
+
+console.log(process.argv);
+
+Run:
+
+node app.js hello
+
+Now you're simultaneously practicing:
+
+Node.js
+   ↓
+Node files
+   ↓
+Modules
+   ↓
+Export
+   ↓
+Import
+   ↓
+Process
+   ↓
+process.argv
+
+This is the kind of small practice I recommend before moving to Express.
+
+
+---
+
+🎯 What you should understand before moving ahead
+
+Don't worry if you can't memorize every syntax immediately. You should be able to explain these in your own words:
+
+1. What is Node.js?
+
+
+2. Why do we need Node.js if JavaScript already exists?
+
+
+3. What is Node REPL?
+
+
+4. How do you run a .js file using Node?
+
+
+5. What is process?
+
+
+6. What is process.argv?
+
+
+7. What is a module?
+
+
+8. Why do we export and import modules?
+
+
+9. What does module.exports do?
+
+
+10. What does require() do?
+
+
+11. What is npm?
+
+
+12. What is a package?
+
+
+13. What is package.json?
+
+
+14. What is node_modules?
+
+
+15. Local vs global installation?
+
+
+16. What are built-in Node modules?
+
+
+
+Once these are clear, the next Node.js concepts—fs, path, HTTP server, Express, routing, middleware, REST API, MongoDB—will make much more sense.
+
+And one important thing: don't try to memorize Node.js as a list of commands.
+ Keep the mental model: Node runs JS outside the browser → modules organize code → npm manages external packages → package.json records the project/dependencies → Express will later sit on top of Node to make backend development easier.
