@@ -1,0 +1,17 @@
+body{
+    background-color: bisque;
+}
+h3{
+    background-color: rgb(233, 250, 215);
+    text-align: center;
+}
+
+form{
+    align-items: center;
+    justify-content: center;
+}
+button{
+    background-color: brown;
+    color: aliceblue;
+    border-radius: 20px;
+}

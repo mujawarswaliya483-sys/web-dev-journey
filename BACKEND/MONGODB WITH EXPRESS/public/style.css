@@ -1,0 +1,21 @@
+body{
+    margin-left: 20px;
+}
+
+.chat{
+    background-color: antiquewhite;
+    padding: 20px;
+    border-radius: 30px;
+    margin: 30px;
+}
+
+.mes{
+    background-color: blueviolet;
+    color: aliceblue;
+}
+
+p{
+    color: rgb(18, 12, 24);
+    background-color: brown;
+    border-radius: 40px;
+}
