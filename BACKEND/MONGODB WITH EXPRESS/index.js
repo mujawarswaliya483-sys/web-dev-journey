@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const chat = require("./models/chat.js");
 const path = require("path");
+const ExpressError = require("./ExpressError.js");
 
 app.set("views",path.join(__dirname,"views"));
 app.set("view engine","ejs");
@@ -27,8 +28,10 @@ app.get("/chats",async(req,res)=>{
     console.log(chats);
     res.render("index.ejs",{chats});
 });
-
+// new route is not contains assynchronous work hence we can do 
+// so we can throw error from here
 app.get("/chats/new",(req,res)=>{
+    throw new ExpressError(404,"Page not found");
 res.render("new.ejs");
 });
 
@@ -64,6 +67,17 @@ app.post("/chats",(req,res)=>{
     res.redirect("/chats");
 });
 
+// NEW - show route
+// throwing error in asynchronous route-
+app.get("/chats/:id",async(req,res,next)=>{
+    let { id } = req.params;
+    let chat = await chat.findById(id);
+    if(!chat){
+        throw new ExpressError(404,"Chat not Found");
+    }
+    res.render("edit.ejs",{ chat });
+});
+
 app.get("/chats/:id/edit", async(req,res)=>{
     let {id} = req.params;
     let chat =  await chat.findById(id);
@@ -73,6 +87,12 @@ app.get("/chats/:id/edit", async(req,res)=>{
 app.get("/",(req,res)=>{
     res.send("root is working");
 });
+// Error Handling Middleware
+app.use((err,req,res,next)=>{
+    let {status=500,message="Some Error Occured"}=err;
+    res.send(status).send(message);
+});
+
 app.listen(port,()=>{
     console.log("port is listening");
 });
