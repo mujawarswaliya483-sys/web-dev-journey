@@ -58,11 +58,11 @@ Very important distinction
 
 Thing	Meaning
 
-JavaScript	Programming language
-Node.js	Runtime environment for JavaScript
-Express.js	Backend framework built on Node.js
-npm	Package manager for Node.js
-MongoDB	Database
+JavaScript	 Programming language
+Node.js	     Runtime environment for JavaScript
+Express.js	 Backend framework built on Node.js
+npm	         Package manager for Node.js
+MongoDB	     Database
 
 
 Think:
@@ -76,7 +76,6 @@ JavaScript
  Backend/API
      ↓
  MongoDB
-
 
 ---
 
@@ -110,7 +109,7 @@ Backend JavaScript
 
 Now the same language can be used on both sides.
 
-JavaScript
+           JavaScript
           /        \
          /          \
     Frontend       Backend
@@ -137,7 +136,6 @@ Hello from Node.js
 Notice that you didn't open a browser.
 
 That's the important idea.
-
 
 ---
 
@@ -172,8 +170,6 @@ Remember
 Node.js → runs JavaScript
 
 npm → manages packages
-
-
 ---
 
 3. Node REPL
@@ -181,8 +177,6 @@ npm → manages packages
 REPL stands for:
 
 > Read – Eval – Print – Loop
-
-
 
 Node provides an interactive environment where you can directly write JavaScript commands.
 
@@ -253,7 +247,6 @@ REPL starts
 Write JavaScript directly
  ↓
 Immediately see result
-
 
 ---
 
@@ -330,9 +323,7 @@ your app.js is running as a process.
 Node provides information about that process through:
 
 process
-
-
----
+--------------
 
 process.argv
 
@@ -448,7 +439,6 @@ Each file can contain separate functionality.
 
 This is called modular programming.
 
-
 ---
 
 Why modules?
@@ -472,7 +462,6 @@ let add = (a, b) => {
 module.exports = add;
 
 Now add is available to other files.
-
 
 ---
 
@@ -1182,8 +1171,6 @@ package.json
 
 > Contains project information, scripts, dependencies, etc.
 
-
-
 Create:
 
 npm init
@@ -1209,7 +1196,6 @@ path
 os
 http
 events
-
 
 ---
 
@@ -1307,7 +1293,6 @@ process.argv
 
 This is the kind of small practice I recommend before moving to Express.
 
-
 ---
 
 🎯 What you should understand before moving ahead
@@ -1316,52 +1301,35 @@ Don't worry if you can't memorize every syntax immediately. You should be able t
 
 1. What is Node.js?
 
-
 2. Why do we need Node.js if JavaScript already exists?
-
 
 3. What is Node REPL?
 
-
-4. How do you run a .js file using Node?
-
+4. How do you run app.js file using Node?
 
 5. What is process?
 
-
 6. What is process.argv?
-
 
 7. What is a module?
 
-
 8. Why do we export and import modules?
-
 
 9. What does module.exports do?
 
-
 10. What does require() do?
-
 
 11. What is npm?
 
-
 12. What is a package?
-
 
 13. What is package.json?
 
-
 14. What is node_modules?
-
 
 15. Local vs global installation?
 
-
 16. What are built-in Node modules?
-
-
 
 Once these are clear, the next Node.js concepts—fs, path, HTTP server, Express, routing, middleware, REST API, MongoDB—will make much more sense.
 
