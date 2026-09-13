@@ -134,7 +134,8 @@ app.post("/users", (req, res) => {
 Used to replace/update a resource.
 
 ``` js
-app.put("/users/:id", (req, res) => {
+app.put("/users/:id", (req, res) => 
+{
   // update user
 });
 ```
