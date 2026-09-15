@@ -1,18 +1,16 @@
 import "./App.css";
-import Title from "./Title";
+import Title from "./Title.jsx";
+// import Product from "./Product";
+import ProductTab from "./ProductTab.jsx";
 
-function Title(){
-  return(
-    <h1>Hello World</h1>
-  );
-}
-function App() {
+function App(){
   return (
-  <div>
-   
-     <Title />
-  </div>
- );
+    <div className="App">
+    {/* <Title />
+    <Title />
+    <Title /> */}
+    <ProductTab />
+    </div>
+  )
 }
-
 export default App
