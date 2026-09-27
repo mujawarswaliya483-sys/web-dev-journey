@@ -5,7 +5,24 @@ import Header from "./components/Header"
 import Dashboard from "./components/Dashboard";
 import TaskList from "./components/TaskList";
 function App() {
-  const [count,setCount] = useState(0);
+  const [tasks,setTasks] = useState([
+    {
+      id:1,
+      title:"Completed react lecture",
+      completed: false
+    },
+    {
+      id:2,
+      title:"Practice JavaScript",
+      completed: false
+    },
+    {
+      id:3,
+      title:"Revise DSA",
+      completed: false
+    },
+  ]);
+  
   return (
 
   
@@ -19,9 +36,13 @@ function App() {
       <Dashboard
       heading="Welcome Back"
       paragraph="Here's your study progress for today."
+      tasks={tasks}
       />
 
-      <TaskList/>
+      <TaskList
+      tasks={tasks}
+      setTasks={setTasks}
+      />
     </>
   )
 }

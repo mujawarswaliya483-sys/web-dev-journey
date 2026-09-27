@@ -1,22 +1,5 @@
 import { useState } from "react";
-export default function TaskList() {
-    const [tasks,setTasks] = useState([
-        {
-    id: 1,
-    title: "Complete React lecture",
-    completed: false
-        },
-        {
-    id: 2,
-    title: "Practice JavaScript",
-    completed: false
-},
-        {
-    id: 3,
-    title: "Revise DSA",
-    completed: false
-}
-    ]);
+export default function TaskList({ tasks,setTasks }) {
 
 // newTask
 //    ↓
@@ -39,6 +22,8 @@ const [newTask,setNewTask] = useState("");
     setTasks(updatedTasks);
     }
 
+    // add task
+
     function addTask(){
         if(newTask.trim() === "")
         {
@@ -53,6 +38,12 @@ const [newTask,setNewTask] = useState("");
            setNewTask("");
     }
 
+    // delete task
+
+    function deleteTask(id){
+        const updatedTasks = tasks.filter((task)=> task.id !== id);
+        setTasks(updatedTasks);
+    }
     return (
         <>
         <input 
@@ -70,8 +61,17 @@ const [newTask,setNewTask] = useState("");
                 <p 
                 key={task.id}
                 onClick={()=>toggleTask(task.id)}
+                className={task.completed ? "completed-task" : ""}
+                
                 >
-                    {task.title} = {task.completed ? "Completed" : "Pending"}
+                    {task.title} = {task.completed ? "Completed" : "Pending"}  
+                    <br/>
+                    <button onClick={(e)=>{
+                        e.stopPropagation();
+                        deleteTask(task.id);
+                    }}>
+                        delete task
+                    </button>
                 </p>
             ))}
         </>
